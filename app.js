@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3000;
 const allowedOrigins = [
   "https://sso-app.clingy.app",
   "http://127.0.0.1:5500",
-  " https://portal.clingy.app",
+  "https://portal.clingy.app",
 ];
 app.use(
   cors({
