@@ -19,7 +19,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Allowed origins for CORS (production and local)
-const allowedOrigins = ["https://sso-app.clingy.app", "http://127.0.0.1:5500"];
+const allowedOrigins = [
+  "https://sso-app.clingy.app",
+  "http://127.0.0.1:5500",
+  " https://portal.clingy.app",
+];
 app.use(
   cors({
     origin: function (origin, callback) {
