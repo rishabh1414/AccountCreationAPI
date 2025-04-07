@@ -638,7 +638,7 @@ app.post("/accountCreationSSE", async (req, res) => {
     console.log("Step 5: Retrieving command center link from funnel list.");
 
     const childAccessToken = await getLocationAccessToken(creationResponse.id);
-    await delay(5000);
+    await delay(10000);
     console.log("delay 5s");
     const funnelPageID = await getFunnelList(
       creationResponse.id,
@@ -711,10 +711,10 @@ app.post("/accountCreationSSE", async (req, res) => {
         };
       }
     });
-    console.log("Parent custom values retrieved:", parentCustom);
+    // console.log("Parent custom values retrieved:", parentCustom);
 
     // Pause before retrieving child's custom values.
-    await delay(5000);
+    await delay(10000);
     const childCustomValues = await getCustomValues(
       creationResponse.id,
       childAccessToken
@@ -729,8 +729,8 @@ app.post("/accountCreationSSE", async (req, res) => {
         };
       }
     });
-    console.log("Child custom values retrieved:", childCustom);
-    await delay(2000);
+    // console.log("Child custom values retrieved:", childCustom);
+    await delay(5000);
 
     // Update each custom field from parent to child (except the Client Assets Folder Link).
     for (let fieldName of fieldsToSync) {
