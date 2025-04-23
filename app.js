@@ -435,7 +435,29 @@ app.get("/api/auth/callback", async (req, res) => {
     res.status(500).send("Error during OAuth token exchange.");
   }
 });
+// ----------------------------------------------------------------
+// NEW: Generate & return a location access token via HTTP
+// ----------------------------------------------------------------
+app.post("/api/location-token", async (req, res) => {
+  // expects { locationId } in the JSON body
+  const { locationId } = req.body;
 
+  if (!locationId) {
+    return res.status(400).json({
+      error: "Missing required field: locationId",
+    });
+  }
+
+  try {
+    const token = await getLocationAccessToken(locationId);
+    return res.status(200).json({ accessToken: token });
+  } catch (err) {
+    console.error("Error in /api/location-token:", err);
+    return res.status(500).json({
+      error: err.message || "Internal server error",
+    });
+  }
+});
 // ================================================================
 // 7. SSE ENDPOINT: ACCOUNT CREATION (/accountCreationSSE)
 // ================================================================
