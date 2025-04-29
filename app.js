@@ -23,6 +23,7 @@ const allowedOrigins = [
   "https://sso-app.clingy.app",
   "http://127.0.0.1:5500",
   "https://portal.clingy.app",
+  "https://equityproperties.clingy.app",
 ];
 app.use(
   cors({
