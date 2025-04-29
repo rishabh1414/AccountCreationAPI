@@ -23,7 +23,6 @@ const allowedOrigins = [
   "https://sso-app.clingy.app",
   "http://127.0.0.1:5500",
   "https://portal.clingy.app",
-"https://equityproperties.clingy.app"
 ];
 app.use(
   cors({
@@ -203,7 +202,13 @@ async function refreshAccessToken(refresh_token) {
     const response = await axios.post(
       `${process.env.GHL_API_DOMAIN}/oauth/token`,
       body,
-      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Version: "2021-07-28", // ← add this
+          Accept: "application/json", // ← and this
+        },
+      }
     );
     if (response.data?.access_token) return response.data;
     throw new Error("Failed to refresh access token");
