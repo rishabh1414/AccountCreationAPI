@@ -16,7 +16,7 @@ const path = require("path");
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
 // Allowed origins for CORS (production and local)
 const allowedOrigins = [
