@@ -24,6 +24,7 @@ const allowedOrigins = [
   "http://127.0.0.1:5500",
   "https://portal.clingy.app",
   "https://equityproperties.clingy.app",
+  "https://offers.nepcashhomebuyers.com/",
 ];
 app.use(
   cors({
