@@ -883,7 +883,27 @@ app.post("/accountCreationSSE", async (req, res) => {
     res.end();
   }
 });
-
+// ----------------------------------------------------------------
+// NEW: Return agency-level OAuth token
+// ----------------------------------------------------------------
+app.get("/agency-token", async (req, res) => {
+  try {
+    // pull the most recent credentials document
+    const creds = await OAuthCredentials.findOne({})
+      .sort({ created_at: -1 })
+      .exec();
+    if (!creds || !creds.access_token) {
+      return res.status(404).json({ error: "No agency token found" });
+    }
+    return res.json({
+      accessToken: creds.access_token,
+      refreshToken: creds.refresh_token,
+    });
+  } catch (err) {
+    console.error("Error fetching agency token:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
 // ================================================================
 // 8. SCHEDULED JOB: TOKEN REFRESH USING NODE-CRON
 // ================================================================
